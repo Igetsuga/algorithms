@@ -75,6 +75,27 @@ function binarySearch_last(A::Vector, x)
     return false 
 end
 
-function my_searchsorted(A::Vector, x::Number)
+function searchsorted_my2(vector::Vector, x::Number)
+    leftIndex = 0
+    rightIndex = length(vector)
+    
+    if (rightIndex == 0 || x < vector[1])
+        return 0
+    else
+        while (leftIndex < rightIndex)
+            middleIndex = leftIndex + (rightIndex - leftIndex) ÷ 2
+            if (vector[middleIndex] <= x)
+                if (middleIndex == length(vector) || x < vector[middleIndex + 1])
+                    return middleIndex
+                end
+                leftIndex = middleIndex
+            else
+                rightIndex = middleIndex
+            end
+        end
+    end
+end
+
+function searchsorted_my1(A::Vector, x::Number)
     return (binarySearch_first(A,x), ":", binarySearch_last(A,x), " --> ", searchsorted(A,x), "\n")
 end
