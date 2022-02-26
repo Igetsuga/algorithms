@@ -75,27 +75,59 @@ function binarySearch_last(A::Vector, x)
     return false 
 end
 
-function searchsorted_my2(vector::Vector, x::Number)
+function searchsorted_first(vector::Vector, x::Number)
     leftIndex = 0
     rightIndex = length(vector)
-    
-    if (rightIndex == 0 || x < vector[1])
-        return 0
-    else
-        while (leftIndex < rightIndex)
-            middleIndex = leftIndex + (rightIndex - leftIndex) ÷ 2
-            if (vector[middleIndex] <= x)
-                if (middleIndex == length(vector) || x < vector[middleIndex + 1])
-                    return middleIndex
-                end
-                leftIndex = middleIndex
-            else
-                rightIndex = middleIndex
+    (rightIndex == 0 || x < vector[1]) && return length(vector)
+    while (leftIndex < rightIndex)
+        middleIndex = leftIndex + (rightIndex - leftIndex) ÷ 2
+        if (vector[middleIndex] <= x)
+            if (middleIndex == length(vector) || x < vector[middleIndex + 1])
+                return middleIndex
             end
+            leftIndex = middleIndex
+        else
+            rightIndex = middleIndex
+        end
+    end
+end
+
+function searchsorted_last(vector::Vector, x::Number)
+    leftIndex = 0
+    rightIndex = length(vector)
+    (rightIndex == 0 || x > vector[length(vector)]) && return length(vector)
+    while (leftIndex < rightIndex)
+        middleIndex = leftIndex + (rightIndex - leftIndex) ÷ 2
+        if (vector[middleIndex] <= x)
+            if (middleIndex == length(vector) || x < vector[middleIndex + 1])
+                return middleIndex
+            end
+            leftIndex = middleIndex
+        else
+            rightIndex = middleIndex
         end
     end
 end
 
 function searchsorted_my1(A::Vector, x::Number)
     return (binarySearch_first(A,x), ":", binarySearch_last(A,x), " --> ", searchsorted(A,x), "\n")
+end
+
+function searchsorted_my2(A::Vector, x::Number)
+    return (searchsorted_first(A,x), ":", searchsorted_last(A,x), " --> ", searchsorted(A,x), "\n")
+
+struct SortedVector{T}
+    vector::Vector{T}
+end
+
+Base.display(vector::SortedVector) = display(vector.vector)
+
+
+function Base.in(x, vector::SortedVector)
+    index = searchsorted_first(x, vector)
+    if index < 1 || index > length(vector)
+        return false
+    else 
+        return 
+    end
 end
