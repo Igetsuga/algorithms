@@ -13,14 +13,14 @@
 
 ## Алгоритмы
 
-| algorithms               | cpp | julia |
-|:------------------------ |:---:|:-----:|
-| gcd                      |  -  |   -   |
-| gcdex                    |  -  |   -   |
-| bin_search               |   - |   -   |
-| bin_pow                  |  +  |   -   |
-| inverse_element          |  -+ |   -   |
-| Euler's Totient Function |  +  |   -   |
-| dfs                      |  -  |   -   |
-| bfs                      |  -  |   -   |
-|                          |     |       |
+| algorithms               | cpp | julia | |
+|:------------------------ |:---:|:-----:|:---: |
+| gcd                      |  -  |   -   | |
+| gcdex                    |  -  |   -   | |
+| bin_search               |   - |   -   | |
+| bin_pow                  |  +  |   -   | |
+| inverse_element          |  -+ |   -   | bin_pow не работает на предпоследнем тесте|
+| Euler's Totient Function |  +  |   -   | |
+| dfs                      |  -  |   -   | | 
+| bfs                      |  -  |   -   | |
+|                          |     |       | |
