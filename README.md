@@ -18,8 +18,8 @@
 | gcd                      |  -  |   -   |
 | gcdex                    |  -  |   -   |
 | bin_search               |   - |   -   |
-| bin_pow                  |  -  |   -   |
-| inverse_element          |  -  |   -   |
+| bin_pow                  |  +  |   -   |
+| inverse_element          |  -+ |   -   |
 | Euler's Totient Function |  +  |   -   |
 | dfs                      |  -  |   -   |
 | bfs                      |  -  |   -   |
