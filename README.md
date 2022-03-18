@@ -10,6 +10,8 @@
 | Quick Sort      |  -  |   -   | BoundsError |
 | Bubble sort    |  -  |   -   | |
 | Сomb sort      |  -  |   -   | |
+| Cocktail shaker sort | - | - | |
+| Merge sort| - | - | |
 
 ## Алгоритмы
 
