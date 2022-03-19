@@ -2,14 +2,16 @@
 
 ## Сортировки
 
-| sort           | cpp | julia |
-|:-------------- |:---:|:-----:|
-| searchsorted   |  -  |   -   |
-| Insertion Sort |  -  |   -   |
-| Shell Sort     |  -  |   -   |
-| Quicksort      |  -  |   -   |
-| Bubble sort    |  -  |   -   |
-| Сomb sort      |  -  |   -   |
+| sort           | cpp | julia | |
+|:-------------- |:---:|:-----:|:--|
+| searchsorted   |  -  |   -   | |
+| Insertion Sort |  -  |   -   | |
+| Shell Sort     |  -  |   -   | |
+| Quick Sort      |  -  |   -   | BoundsError |
+| Bubble sort    |  -  |   -   | |
+| Сomb sort      |  -  |   -   | |
+| Cocktail shaker sort | - | - | |
+| Merge sort| - | - | |
 
 ## Алгоритмы
 
