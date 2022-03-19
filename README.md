@@ -17,11 +17,11 @@
 
 | algorithms               | cpp | julia | |
 |:------------------------ |:---:|:-----:|:---: |
-| gcd                      |  +  |   -   | |
+| gcd                      |  +  |   +   | |
 | lcm                      |  +  |   -   | |
-| gcdex                    |  -  |   -   | |
-| bin_search               |   - |   -   | |
-| bin_pow                  |  +  |   -   | |
+| gcdex                    |  -  |   -   | я не понимаю его совсем |
+| bin_search               |  -  |   -   | |
+| bin_pow                  |  +  |   +   | |
 | inverse_element          |  -+ |   -   | bin_pow не работает на предпоследнем тесте|
 | Euler's Totient Function |  +  |   -   | |
 | dfs                      |  -  |   -   | | 
