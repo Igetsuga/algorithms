@@ -2,6 +2,7 @@
 
 ## Дискретная математика
 https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6fMUY/edit?usp=sharing
+---
 
 ## Сортировки
 
@@ -15,6 +16,7 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 | Сomb sort      |  -  |   -   | |
 | Cocktail shaker sort | - | - | |
 | Merge sort| - | - | |
+---
 
 ## Алгоритмы
 
