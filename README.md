@@ -1,5 +1,8 @@
 # algorithms
 
+## Дискретная математика
+https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6fMUY/edit?usp=sharing
+
 ## Сортировки
 
 | sort           | cpp | julia | |
