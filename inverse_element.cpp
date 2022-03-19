@@ -6,11 +6,11 @@ int64_t bin_pow(int64_t x, int64_t pow, int64_t module)
 {
     int64_t result = 1;
     while (pow > 0) {
-        if (pow & 0x01) { // побитовая конъюнкция <=> (pow % 2 == 1);
+        if (pow & 0x01) { //  <=> (pow % 2 == 1);
             result = (result * x) % module; // pow = pow - 1;
         }
         x = (x * x) % module; // x ** 2 ==> pow = pow / 2;
-        pow >>= 1; // сдвигаю все биты числа вправо тем самым происходит деление числа на 2; <=> pow /= 2;
+        pow >>= 1; //  <=> pow /= 2;
     }
     return result;
 }

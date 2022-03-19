@@ -14,6 +14,9 @@ bool prime(int64_t n)
 
 int64_t phi(int64_t value)
 {
+    
+    if (value == 1) { return 1; }
+    
     if (!prime(value)) {
         int64_t phi = value;
         int64_t itt = sqrt(value) + 1;
