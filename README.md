@@ -23,13 +23,13 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 
 | algorithms               | cpp | julia | |
 |:------------------------ |:---:|:-----:|---: |
-| gcd                      |  +  |   +   | |
-| lcm                      |  +  |   -   | |
+| gcd                      |  +  |   +   | понимаю |
+| lcm                      |  +  |   -   | понимаю |
 | gcdex                    |  -  |   -   | я не понимаю его совсем |
-| bin_search               |  -  |   -   | |
+| bin_search               |  -  |   -   | понимаю, нужно написать |
 | bin_pow                  |  +  |   +   | нужно ещё разобраться |
 | inverse_element          |  -+ |   -   | bin_pow не работает на предпоследнем тесте|
-| Euler's Totient Function |  +  |   -   | |
-| dfs                      |  -  |   -   | | 
-| bfs                      |  -  |   -   | |
+| Euler's Totient Function |  +  |   -   | понимаю |
+| dfs                      |  -  |   -   | понимаю, но пока не могу сам написать| 
+| bfs                      |  -  |   -   | понимаю, но пока не могу сам написать |
 |                          |     |       | |
