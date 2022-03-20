@@ -32,4 +32,11 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 | Euler's Totient Function |  +  |   -   | понимаю |
 | dfs                      |  -  |   -   | понимаю, но пока не могу сам написать| 
 | bfs                      |  -  |   -   | понимаю, но пока не могу сам написать |
+| prime                         |   +  |   -    | понимаю |
+|                          |     |       | |
+|                          |     |       | |
+|                          |     |       | |
+|                          |     |       | |
+|                          |     |       | |
+|                          |     |       | |
 |                          |     |       | |
