@@ -1,7 +1,7 @@
 #pragma GCC optimize("Ofast")
 #include <bits/stdc++.h>
 using namespace std;
-
+////////////////////////////////////////////////////////////////////////////////
 bool prime(int64_t n)
 {
     int64_t itt = sqrt(n) + 1;
@@ -11,7 +11,7 @@ bool prime(int64_t n)
     }
     return true;
 }
-
+////////////////////////////////////////////////////////////////////////////////
 int64_t phi(int64_t value)
 {
     
@@ -42,7 +42,7 @@ int64_t phi(int64_t value)
     return phi;
     
 }
-
+////////////////////////////////////////////////////////////////////////////////
 int main()
 {
     ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
