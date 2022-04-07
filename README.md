@@ -26,7 +26,7 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 | gcd                      |  +  |   +   | понимаю |
 | lcm                      |  +  |   -   | понимаю |
 | gcdex                    |  -  |   -   | я не понимаю его совсем |
-| bin_search               |  -  |   -   | понимаю, нужно написать |
+| bin_search               |  -  |   -   | понимаю|
 | bin_pow                  |  +  |   +   | нужно ещё разобраться |
 | inverse_element          |  -+ |   -   | bin_pow не работает на предпоследнем тесте|
 | Euler's Totient Function |  +  |   -   | понимаю |
