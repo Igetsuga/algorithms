@@ -30,6 +30,7 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 | bin_pow                  |  +  |   +   | нужно ещё разобраться |
 | inverse_element          |  -+ |   -   | bin_pow не работает на предпоследнем тесте|
 | Euler's Totient Function |  +  |   -   | понимаю |
+| divrem                   |  -  |   -   |  |
 | dfs                      |  -  |   -   | понимаю, но пока не могу сам написать| 
 | bfs                      |  -  |   -   | понимаю, но пока не могу сам написать |
 | prime                         |   +  |   -    | понимаю |
@@ -42,3 +43,16 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 | Алгоритм Борувки      |   -  |    -   | |
 |                          |     |       | |
 |                          |     |       | |
+
+
+## to do 
+| № | status | problems |
+|:-:|:------:|---------:|
+|1| - |  |
+|2| - |  |
+|3| - |  | 
+|4| - |  |
+|5| - |  |
+|6| - |  |
+|7| - |  |
+| struct Polynomial | - |  |

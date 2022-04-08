@@ -1,5 +1,5 @@
 
-function gcd(x::Integer, y::Integer)
+function gcd(x::Integer, y::Integer)::Integer
 
     while (x > 0 && y > 0)
 

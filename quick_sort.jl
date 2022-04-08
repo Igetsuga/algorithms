@@ -2,13 +2,18 @@ unsorted_vector = randn(100000)
 
 
 # отвечает за выбор опорного элемента `pivot`и за перемещение элементов в самом массиве
-function partition!(vector::AbstractVector, left::Integer, right::Integer)
+function partition!(vector::AbstractVector)
 
-    # выбор опорного элемента - разделяющий массив элемент
+    left = firstindex(vector)
+    right = lastindex(vector)
+
+    # выбор опорного элемента - разделяющий массив элемент, в этой реализации в качестве элемента `pivot` выбирается
+    # элемент из середины сортирумого промежутка 
     pivot = vector[ left + (right - left) ÷ 2 ] 
 
 
     # цикл прохода
+    # @inbounds while (left <= right)
     while (left <= right)
 
         # находим в левой части массива элемент, который больше опорного
@@ -21,8 +26,8 @@ function partition!(vector::AbstractVector, left::Integer, right::Integer)
             right = right - 1
         end 
 
-        # это условие должно выпониться только тогда, когда после очередного прогона 
-        # индексы left и right поменялись местами, тогда цикл должен быть закончен, а 
+        # это условие должно выпониться только тогда, когда после очередного прохода 
+        # индексы left и right оказались не в своих частях массива, тогда цикл должен быть закончен, а 
         # элементы не должны поменяться местами, т.к. уже находяться в правильных частях массива
         if (left >= right)
             break
@@ -42,22 +47,22 @@ end
 function quick_sort!(vector::AbstractVector, index_l, index_r)
 
     # база рекурсии
-    if (length(vector[index_l : index_r]) < 2)
+    if (index_r - index_l <= 0)
         return vector
-
-    else 
-        index_current = partition!(vector, index_l, index_r)
+    end
         
+    index_current = partition!( @view(vector[index_l:index_r]) )
+    println(index_current)
 
-        # новая левая часть массива
-        quick_sort!( @view( vector[begin : index_current] ), firstindex(vector), index_current )
+    # новая левая часть массива
+    quick_sort!( @view( vector[begin:index_current] ), firstindex(vector), index_current )
     
-        # новая правая часть массива
-        quick_sort!( @view( vector[index_current + 1 : end] ), index_current + 1, lastindex(vector) )
+    # новая правая часть массива
+    quick_sort!( @view( vector[index_current + 1:end] ), index_current + 1, lastindex(vector) )
 
 
-        return vector
-    end 
+    return vector
+     
 end
 
 
