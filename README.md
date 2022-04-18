@@ -9,11 +9,11 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 
 | sort           | cpp | julia | |
 |:-------------- |:---:|:-----:|:--|
+| Bubble sort    |  +  |   +   | |
+| Insertion Sort |  +  |   -+   | |
 | searchsorted   |  -  |   -   | |
-| Insertion Sort |  -  |   -   | |
 | Shell Sort     |  -  |   -   | |
 | Quick Sort      |  -  |   -   | BoundsError |
-| Bubble sort    |  +  |   +   | |
 | Сomb sort      |  -  |   -   | |
 | Cocktail shaker sort | - | - | |
 | Merge sort| - | - | |
@@ -21,7 +21,7 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 
 ## Алгоритмы
 
-| algorithms               | cpp | julia | |
+| algorithms               | cpp | julia | complexity |
 |:------------------------ |:---:|:-----:|---: |
 | gcd                      |  +  |   +   | понимаю |
 | lcm                      |  +  |   -   | понимаю |
@@ -31,12 +31,12 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 | inverse_element          |  -+ |   -   | bin_pow не работает на предпоследнем тесте|
 | Euler's Totient Function |  +  |   -   | понимаю |
 | divrem                   |  -  |   -   |  |
-| dfs                      |  -  |   -   | понимаю, но пока не могу сам написать| 
-| bfs                      |  -  |   -   | понимаю, но пока не могу сам написать |
-| prime                         |   +  |   -    | понимаю |
+| dfs                      |  +  |   -   | понимаю | 
+| bfs                      |  +  |   -   | понимаю |
+| prime                    |   + |   -   | понимаю |
 | алгоритм Дейкстры        |  -  |   -   | |
 | Алгоритм Прима           |  -  |   -   | |
-|    Алгоритм Ли           |   -  |  -     | |
+|    Алгоритм Ли           |   -  |  -   | |
 |Алгоритм Флойда  |   -  |   -    | |
 | Алгоритм Беллмана — Форда    |   -  |   -    | |
 |  Алгоритм Краскала        |  -   |   -    | |
@@ -56,3 +56,5 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 |6| - |  |
 |7| - |  |
 | struct Polynomial | - |  |
+| BitVector | - |  |
+| BitVector | - |  |
