@@ -44,6 +44,7 @@ const auto ready = []()
 
 void BubbleSort(vi& vector_)
 {
+    bool permutation = false;
     for (int itt = 0; itt < vector_.size() - 1; itt++)
     {
         for (int jtt = 0; jtt < vector_.size() - 1 - itt; jtt++)
@@ -51,8 +52,10 @@ void BubbleSort(vi& vector_)
             if (vector_[jtt] > vector_[jtt + 1])
             {
                 std::swap(vector_[jtt], vector_[jtt + 1]);
+                permutation = true;
             }
         }
+        if (!permutation) { break; }
     }
 }
  

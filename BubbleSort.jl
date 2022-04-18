@@ -1,11 +1,16 @@
 function BubbleSort!(vector::AbstractVector)
 
-    for itt = 1:(lastindex(vector) - 1)
-        for jtt = 1:(lastindex(vector) - itt)
+    @inbounds for itt = 1:(lastindex(vector) - 1)
+        flag = false
+        @inbounds for jtt = 1:(lastindex(vector) - itt)
             if (vector[jtt] > vector[jtt + 1])
                 vector[jtt], vector[jtt + 1] = vector[jtt + 1], vector[jtt]
+                flag = true
             end
         end
+        if (!flag)
+            break 
+        end 
     end 
 
 end
