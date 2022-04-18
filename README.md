@@ -13,7 +13,7 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 | Insertion Sort |  -  |   -   | |
 | Shell Sort     |  -  |   -   | |
 | Quick Sort      |  -  |   -   | BoundsError |
-| Bubble sort    |  -  |   -   | |
+| Bubble sort    |  +  |   +   | |
 | Сomb sort      |  -  |   -   | |
 | Cocktail shaker sort | - | - | |
 | Merge sort| - | - | |
@@ -36,7 +36,7 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 | prime                         |   +  |   -    | понимаю |
 | алгоритм Дейкстры        |  -  |   -   | |
 | Алгоритм Прима           |  -  |   -   | |
-|    Алгоритм Ли                      |   -  |  -     | |
+|    Алгоритм Ли           |   -  |  -     | |
 |Алгоритм Флойда  |   -  |   -    | |
 | Алгоритм Беллмана — Форда    |   -  |   -    | |
 |  Алгоритм Краскала        |  -   |   -    | |
