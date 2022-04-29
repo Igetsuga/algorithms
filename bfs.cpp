@@ -59,22 +59,22 @@ void print_(const vi& vector)
 
 
 vi USED(0,0); // вектор, хранящий вершины, в которых мы уже были
-vvi ADJ; // матрица смежности
+vvi ADJ;      // матрица смежности
 
 
-void bfs(int edge)
+void bfs(int point)
 {
     std::queue<int> line;
 
-    line.push(edge);
-    USED[edge] = 1;
+    line.push(point);
+    USED[point] = 1;
 
     while (!line.empty())
     {
-        int edge_current = line.front();
+        int node_current = line.front();
         line.pop();
 
-        for (auto nb : ADJ[edge_current])
+        for (auto nb : ADJ[node_current])
         {
             if (!USED[nb])
             {
@@ -98,19 +98,19 @@ int main()
 
    for (int itt = 0; itt < input_; itt++)
    {
-        int edge = 0; cin >> edge;
-        int edge_n = 0; cin >> edge_n;
+        int node_source = 0; cin >> node_source;
+        int node_target = 0; cin >> node_target;
 
-        ADJ[edge].push_back(edge_n);
-        ADJ[edge_n].push_back(edge);
+        ADJ[node_source].push_back(node_target);
+        ADJ[node_target].push_back(node_source);
    }
 
 
-   for (int edge = 0; edge < edges; edge++)
+   for (int point = 0; point < edges; point++)
    {
-        if (!USED[edge])
+        if (!USED[point])
         {
-            bfs(edge);
+            bfs(point);
         }
    }
 
