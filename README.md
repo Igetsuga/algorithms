@@ -11,8 +11,8 @@ https://docs.google.com/spreadsheets/d/1U-mZH1Xw1n1dv2y00tfw81j-7pIpebTX69PAsj6f
 |:-------------- |:---:|:-----:|:--|
 | Bubble sort    |  +  |   +   | |
 | Insertion Sort |  +  |   -+   | |
+| Shell Sort     |  -  |   -   | не могу найти ошибку |
 | searchsorted   |  -  |   -   | |
-| Shell Sort     |  -  |   -   | |
 | Quick Sort      |  -  |   -   | BoundsError |
 | Сomb sort      |  -  |   -   | |
 | Cocktail shaker sort | - | - | |
