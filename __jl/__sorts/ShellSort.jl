@@ -4,7 +4,7 @@
 # в первый элемент, либо пока перестановки все еще случаются. Потом снова возвращаемся к 
 # элементу (i + 1) и повторяем тоже самое, пока шаг больше 0.
 # Кароч, это почти тоже самое, что и бабл сорт, но с самого начала шаг равен не 1, а 
-# половине длины вектора. Сначала мы сравниваем все элементы, которые на ходятся на 
+# половине длины вектора. Сначала мы сравниваем все элементы, которые находятся
 # друг от друга на расстоянии равном шагу. Если в какой-то момент у нас случилось, что 
 # элемент стоящий на позиции i больше, чем элемент стоящий на позиции (i + gap), то
 # сначала мы меняем их местами, а дальше сравниваем элемент, который стоял на позиции 
@@ -16,30 +16,42 @@
 # том, что чем дальше, тем мешьше сравнений и перестановок придется сделать. 
 
 
-function ShellSort!(vector::AbstractVector{Type}) where Type
-    vector_lenght::Integer = length(vector)
+# Эта сортировка очень похожа на BubbleSort, но во второй с 
+# самого начала шаг = 1 и сравнивались только значения
+# отстающие на 1 друг друга, когда здесь не совсем так.
+# Выбираем шаг `gap`, сравниваем элементы отстающие друг от 
+# друга на расстоянии `gap`, тем самым больший из этих элементов
+# выносится в конец вектора. В тот момент, когда больший меняется
+# с соседом, сосед отравляется искать себе место, среди тех, которые
+# больший уже прошел. В самом конце шаг `gap` будет равен 1, тогда это 
+# точная BubbleSort, но гораздо быстрее за счет того, что вектор уже 
+# почти отсортирован
 
-    # Выбираем первоначальный gap
-    gap::Integer = vector_lenght ÷ 2;
+# Реализация 1
+function ShellSort!(vector::Vector{Type}) where Type
+    size::Integer = length(vector)
+
+    # Выбираем начальное значение для `gap`
+    gap::Integer = size ÷ 2;
     
-    # Пока gap больше 0 
+    # Пока `gap` больше 0 
     while ( gap > 0 )
         
-        for index_start::Integer in 1 : vector_lenght - gap 
-            println(index_start, " : ", gap, " : ", vector[index_start], " <--> ", vector[index_start + gap] ) 
-            if (vector[index_start] > vector[index_start + gap])
+        for index_current::Integer in 1 : size - gap 
+            # println(index_current, " : ", gap, " : ", vector[index_current], " <--> ", vector[index_current + gap] ) 
+            if (vector[index_current] > vector[index_current + gap])
                 
-                vector[index_start], vector[index_start + gap] = 
-                vector[index_start + gap], vector[index_start]
+                vector[index_current], vector[index_current + gap] = 
+                vector[index_current + gap], vector[index_current]
 
-                index_compare::Integer = index_start 
-                permutation::Bool = false 
+                index_compare::Integer = index_current
+                permutation::Bool = true 
 
-                while ( !permutation && index_compare - gap > 0 )
+                while ( permutation && (index_compare - gap > 0) )
                     
                     if (vector[index_compare] < vector[index_compare - gap])
 
-                        println(gap, " :::: ", index_compare, " : ", vector[index_compare], " <--> ", vector[index_compare - gap] ) 
+                        # println(gap, " :::: ", index_compare, " : ", vector[index_compare], " <--> ", vector[index_compare - gap] ) 
                         
                         vector[index_compare], vector[index_compare - gap] = 
                         vector[index_compare - gap], vector[index_compare]
@@ -60,13 +72,57 @@ function ShellSort!(vector::AbstractVector{Type}) where Type
 end
 
 
-unsorted_vector =  [0.5398815214815024, 0.904427251181875, 0.14359239927671053, 0.6685221789412202, 0.15012254794734026, 0.8437516189156684, 0.46475922802394254, 0.7488612583560331, 0.5523845879853817, 0.13950319933022115, 0.4469631610720366, 0.11836921581435778, 0.29527324420398426, 0.31216161654101426, 0.09060008015256626, 0.8077955037136461, 0.8078944181866511, 0.65086967824949, 0.09613702108924282, 0.7773035011490173]
-println(unsorted_vector)
+unsorted_vector = randn(100000)
 println(issorted(unsorted_vector))
-A = copy(unsorted_vector)
-ShellSort!(unsorted_vector)
-A = sort(A)
-println(A .== unsorted_vector)
-println(unsorted_vector)
-# println(A)
+
+@time ShellSort!(unsorted_vector)
+
+println(issorted(unsorted_vector))
+
+
+# Реализация 2
+function ShellSort_Sedgewick!(vector::Vector{Type}) where Type
+    vector_gap = filter( n -> (n < length(vector)), [1, 5, 19, 41, 109, 209, 505, 929, 2161, 3905,
+     8929, 16001, 36289, 64769, 146305, 260609, 587521, 1045505, 2354689, 4188161, 9427969, 16764929,
+      37730305, 67084289, 150958081, 268386305, 603906049, 1073643521, 2415771649, 4294770689,
+       9663381505, 17179475969] )
+
+    for gap in vector_gap
+
+        for index_current::Integer in 1 : length(vector) - gap 
+            # println(index_current, " : ", gap, " : ", vector[index_current], " <--> ", vector[index_current + gap] ) 
+            if (vector[index_current] > vector[index_current + gap])
+                
+                vector[index_current], vector[index_current + gap] = 
+                vector[index_current + gap], vector[index_current]
+
+                index_compare::Integer = index_current
+                permutation::Bool = true 
+
+                while ( permutation && (index_compare - gap > 0) )
+                    
+                    if (vector[index_compare] < vector[index_compare - gap])
+
+                        # println(gap, " :::: ", index_compare, " : ", vector[index_compare], " <--> ", vector[index_compare - gap] ) 
+                        
+                        vector[index_compare], vector[index_compare - gap] = 
+                        vector[index_compare - gap], vector[index_compare]
+                        permutation = true
+                    else
+                        permutation = false
+                    end 
+
+                    index_compare = index_compare - gap
+                
+                end
+            end
+        end
+    end
+end
+
+unsorted_vector = randn(100000)
+println(issorted(unsorted_vector))
+
+@time ShellSort_Sedgewick!(unsorted_vector)
+
 println(issorted(unsorted_vector))

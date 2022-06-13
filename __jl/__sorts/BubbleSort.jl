@@ -16,10 +16,8 @@ function BubbleSort!(vector::AbstractVector)
 end
 
 unsorted_vector = randn(100)
-A = copy(unsorted_vector)
 println(issorted(unsorted_vector))
 
+@time BubbleSort!(unsorted_vector)
 
-BubbleSort!(unsorted_vector)
-# println(A .== unsorted_vector)
 println(issorted(unsorted_vector))

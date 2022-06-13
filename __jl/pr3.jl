@@ -4,20 +4,6 @@ unsorted_vector2 = randn(100000)
 unsorted_vector3 = randn(100000)
 unsorted_vector4 = randn(100000)
 
-function insertion_sort!(vector::AbstractVector)
-    for i in 2 : length(vector)
-        j = i - 1
-        key = vector[i]
-        while (j >= 1 && vector[j] > key)
-            vector[j + 1] = vector[j]
-            j -= 1
-            vector[j + 1] = key
-        end
-    end
-    return vector 
-end
-
-
 function shell_sort_var1!(vector::AbstractVector)
     n = length(vector) ÷ 2
     while (n > 0)

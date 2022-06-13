@@ -35,11 +35,8 @@ end
 
 
 unsorted_vector = randn(100)
-A = copy(unsorted_vector)
 println(issorted(unsorted_vector))
 
+@time InsertionSort!(unsorted_vector)
 
-InsertionSort!(unsorted_vector)
-println(A .== unsorted_vector)
-println(unsorted_vector) 
 println(issorted(unsorted_vector))

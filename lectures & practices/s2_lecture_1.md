@@ -241,7 +241,7 @@ $$ m_{n}=\min(m_{n-1},a_n) $$
 
 ```julia
 function maximum_(A)
-    m = typemin(eltype(A)) # m = -Inf
+    m = typemax(eltype(A)) # m = -Inf
     for a in A
         m = min(m,a)
     end
