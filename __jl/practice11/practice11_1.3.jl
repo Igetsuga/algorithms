@@ -10,6 +10,8 @@ using ("__geometry.jl")
 # части выполнено P(x,y) < 0; для каждой токи принадлежащей плоскости P выполнено
 # P(x,y) = 0; F - некоторая функция от двух переменных, задающая плоскость P
 function is_similar_side_plane(F::Function, A::g_vector{Type}, B::g_vector{Type}) where Type
+   
+   
    return ( F(A) * F(B) < 0 ) 
 end
 

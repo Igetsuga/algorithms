@@ -1,5 +1,65 @@
 using LinearAlgebra
 
+# ----------------------------------------
+# Введение типов -------------------------
+# ----------------------------------------
+# Код Алексеева П.
+"""Абстрактный тип многоугольника"""
+abstract type AbstractPolygon{Type<:Real} end
+
+"""
+- обычный (неопределенный) многоугольник
+"""
+struct Polygon{Type} <: AbstractPolygon{Type} 
+    # вектор точек, задающих многоугольник
+    vertices::Vector{g_vector{Type}}
+end
+
+"""
+- выпуклый многоугольник
+"""
+struct ConvexPolygon{Type} <: AbstractPolygon{Type}
+    # вектор точек, задающих многоугольник
+    vertices::Vector{g_vector{Type}}
+end
+
+
+"""
+Дублирует в конце вектора его первый элемент, если изначально этого дублирования не было.
+"""
+function double_ended!(polygon::AbstractPolygon)::Bool
+    if ( polygon[begin] != polygon[end] )
+        push!(polygon, polygon[begin])
+        
+        
+        return true
+    end
+    
+    
+    return false
+end
+
+"""
+Удаляет из конца вектора элемент, дублирующий первый, если такой лемент был.
+"""
+function single_ended!(polygon::AbstractPolygon)::Bool
+    if polygon[begin] == polygon[end]
+        pop!(polygon)
+        
+        
+        return true
+    end
+    
+    
+    return false
+end
+# ----------------------------------------
+# ----------------------------------------
+# ----------------------------------------
+
+
+
+
 #######################################################################################################
 # Именованный картеж, представляющий собой структуру точки на плоскости.
 # Поскольку точку на плоскости можно трактовать как радиус-вектор, а при 
@@ -28,6 +88,11 @@ Base. cos( A::g_vector{Type}, B::g_vector{Type} ) where Type = ( dot(A,B) / (nor
 
 # sin(ϕ), где ϕ - угол между двумя векторами
 Base. sin( A::g_vector{Type}, B::g_vector{Type} ) where Type = ( xdot(A,B) / (norm(A) * norm(B)) )
+
+# Знак синуса угла между веторами
+Base. sign( A::g_vector{Type}, B::g_vector{Type} ) where Type = sign(sin(A,B))
+
+
 #######################################################################################################
 #######################################################################################################
 # Введем объект - отрезок. Этот объект будет задаваться своими концами - геометрическими точками
@@ -36,3 +101,8 @@ segment{Type <: Real} = NamedTuple{(:begin_, :end_), Tuple{g_vector{Type}, g_vec
 
 # Введем объект - прямая. Этот объект будет задаваться точкой и своим направляющем вектором
 line{Type <: Real} = NamedTuple{(:point_, :direction), Tuple{g_vector{Type}, g_vector{Type}}}
+
+
+
+
+

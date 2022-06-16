@@ -12,5 +12,7 @@ using ("__geometry.jl")
 # заданные точки лежат по одну сторону от прямой, произведение F(x_a,y_a) * F(x_b,y_b) 
 # будет положительным, иначе отрицательным
 function is_similar_side_line(F::Function, A::g_vector{Type}, B::g_vector{Type}) where Type
+    
+    
     return ( F(A) * F(B) > 0 ) 
  end

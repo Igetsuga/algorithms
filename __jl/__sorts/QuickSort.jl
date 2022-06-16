@@ -45,8 +45,8 @@ function partition_Lomuto!(vector::Vector{Type}) where Type
     return index_smaller, index_smaller + 2
 end
 
-# Разбиение Хоара
 
+# Разбиение Хоара
 function partition_Hoare!(vector::Vector{Type}) where Type
 
     left = firstindex(vector)
@@ -86,11 +86,11 @@ function QuickSort!(vector::Vector{Type}) where Type
 
     if (length(vector) > 1)
 
-        leftPart_lastIndex, rightPart_firstIndex = partition_Hoare!(vector)
-        
-        QuickSort!( @view(vector[begin : leftPart_lastIndex]) )
+        (leftPart_lastIndex, rightPart_firstIndex) = partition_Hoare!(vector)
 
-        QuickSort!( @view(vector[rightPart_firstIndex : end]) )
+        QuickSort!( @view vector[begin : leftPart_lastIndex] )
+
+        QuickSort!( @view vector[rightPart_firstIndex : end] )
 
     else
         
