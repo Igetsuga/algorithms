@@ -89,8 +89,12 @@ Base. cos( A::g_vector{Type}, B::g_vector{Type} ) where Type = ( dot(A,B) / (nor
 # sin(ϕ), где ϕ - угол между двумя векторами
 Base. sin( A::g_vector{Type}, B::g_vector{Type} ) where Type = ( xdot(A,B) / (norm(A) * norm(B)) )
 
+# Угол между прямыми по направ-им веторам
+_angle( A::g_vector{Type}, B::g_vector{Type} ) where Type = atan(sin(A, B), cos(A, B))
+   
+
 # Знак синуса угла между веторами
-Base. sign( A::g_vector{Type}, B::g_vector{Type} ) where Type = sign(sin(A,B))
+Base. _sign( A::g_vector{Type}, B::g_vector{Type} ) where Type = sign(sin(A,B))
 
 
 #######################################################################################################

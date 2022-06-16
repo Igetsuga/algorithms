@@ -13,14 +13,14 @@ function isInside(node::g_vector{Type}, polygon::Polygon{Type}) where Type
     sum_angles = 0.0
 
     for it in firstindex(polygon.vertices) : lastindex(polygon.vertices) - 1
-        sum_angles += angle(polygon.vertices[it+1] - node, polygon.vertices[it] - node)
+        sum_angles += _angle(polygon.vertices[it+1] - node, polygon.vertices[it] - node)
     end
 
-    if flag == true
+    if ( flag == true )
         single_ended!(polygon)
     end
 
-    if sum_angles < pi # угол равен 0
+    if ( sum_angles < pi ) # угол равен 0
         
         
         return true 
@@ -40,11 +40,11 @@ isinner(node::Vector2D{T}, polygon::ConvexPolygon{T})
 function isInside(node::g_vector{Type}, polygon::Polygon{Type})::Bool where Type
     flag = double_ended!(polygon)
     
-    sign_prev = sign(polygon.vertices[begin+1] - node,
+    sign_prev = _sign(polygon.vertices[begin+1] - node,
      polygon.vertices[begin] - node)
     
      for it in firstindex(polygon.vertices) + 1 : lastindex(polygon.vertices) - 1
-        sign_cur += sign(polygon[it+1] - node, polygon[it] - node)
+        sign_cur += _sign(polygon[it+1] - node, polygon[it] - node)
         
         if ( sign_prev * sign_cur < 0 )
             
