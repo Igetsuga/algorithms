@@ -18,36 +18,42 @@ end
 # меньше чем `pivot`, правая соответственно больше
 
 # Разбиение Ломуто
-function partition_Lomuto!(vector::Vector{Type}) where Type
+function partition_Lomuto!(vector::AbstractVector)
 
     left = firstindex(vector)
     right = lastindex(vector)
-
+    
+    # index_mid = left + ( (right - left) ÷ 2 )
     # пусть `pivot` -- середина среза
-    pivot::Type = vector[ left + ( (right - left) ÷ 2 ) ]
+    
+    
     # Отправляем `pivot` в конец
-    vector[ left + ( (right - left) ÷ 2 ) ], vector[end] =
-    vector[end], vector[ left + ( (right - left) ÷ 2 ) ]
+    # vector[index_mid], vector[end] =
+    # vector[end], vector[index_mid]
+
+    pivot = vector[end]
 
     index_smaller = 0
-    for counter_compare in 1 : lastindex(vector) - 1
-        if (vector[counter_compare] < pivot)
-            index_smaller = index_smaller + 1
-            vector[counter_compare], vector[index_smaller] = 
-            vector[index_smaller], vector[counter_compare]
+    for compare_counter in 1 : lastindex(vector) - 1
+        if (vector[compare_counter] < pivot)
+            index_smaller += 1
+            vector[compare_counter], vector[index_smaller] = 
+            vector[index_smaller], vector[compare_counter]
         end
     end
 
-    vector[ left + ( (right - left) ÷ 2 ) ], vector[index_smaller + 1] =
-    vector[index_smaller + 1], vector[ left + ( (right - left) ÷ 2 ) ]
+    # vector[ left + ( (right - left) ÷ 2 ) ], vector[index_smaller + 1] =
+    # vector[index_smaller + 1], vector[ left + ( (right - left) ÷ 2 ) ]
+    vector[index_smaller + 1], vector[end] = 
+    vector[end], vector[index_smaller + 1] 
 
 
-    return index_smaller, index_smaller + 2
+    return index_smaller, index_smaller + 1
 end
 
 
 # Разбиение Хоара
-function partition_Hoare!(vector::Vector{Type}) where Type
+function partition_Hoare!(vector::AbstractVector{Type}) where Type
 
     left = firstindex(vector)
     right = lastindex(vector)
@@ -82,7 +88,7 @@ function partition_Hoare!(vector::Vector{Type}) where Type
     return right, left + 1
 end
 
-function QuickSort!(vector::Vector{Type}) where Type
+function QuickSort!(vector::AbstractVector) 
 
     if (length(vector) > 1)
 
@@ -103,5 +109,54 @@ unsorted_vector = randn(100000)
 println(issorted(unsorted_vector))
 
 @time QuickSort!(unsorted_vector)
+a = sort(unsorted_vector)
 
+println(issorted(unsorted_vector))
+# 
+# b  = (a .== unsorted_vector)
+# println(b)
+
+function partition!(vector::AbstractVector)
+    
+    left = firstindex(vector)
+    right = lastindex(vector)
+
+    pivot = vector[end]
+    index_smaller = 0
+
+    for it in 1 : lastindex(vector) - 1
+        if (vector[it] < pivot)
+            index_smaller += 1
+            vector[it], vector[index_smaller] =
+            vector[index_smaller], vector[it]
+        end
+    end
+
+    vector[index_smaller + 1], vector[end] = 
+    vector[end], vector[index_smaller + 1] 
+
+
+
+    return index_smaller, index_smaller + 1
+end
+
+
+function _quicksort!(vector::AbstractVector)
+    
+
+    if ( length(vector) > 1 )
+
+        (leftPart_lastIndex, rightPart_firstIndex) = partition!(vector)
+        _quicksort!( @view vector[begin : leftPart_lastIndex] )
+        _quicksort!( @view vector[rightPart_firstIndex : end] )
+    else 
+        return vector
+    end
+
+end
+
+unsorted_vector = randn(100000)
+println(issorted(unsorted_vector))
+
+@time _quicksort!(unsorted_vector)
 println(issorted(unsorted_vector))
