@@ -115,6 +115,52 @@ function order_statistics!(vector::AbstractVector{Type}, order::Integer) where T
 end
 
 
+"""Вычисление k-ой порядковой статистики методом Хоара"""
+function order_statistics!(vector::AbstractVector, it::Integer) 
+    
+    function _find(index_range)
+        left_range, right_range = _partition!(vector, index_range, vector[rand(index_range)])
+        
+        if ( it in left_range )
+            
+            
+            return _find(left_range) 
+        elseif (it in right_range)
+            
+            
+            return _find(right_range)
+        else
+            
+            
+            return vector[it]
+        end
+    end
+
+    _find( firstindex(vector) : lastindex(vector) )
+end
+
+@inline function _partition!(vector, index_range::AbstractUnitRange, pivot)
+    
+    it, left, right = index_range[1] - 1, index_range[begin] - 1, index_range[end]
+    
+    @inbounds while ( left < right )
+        if ( vector[left+1] == pivot )
+        
+            left += 1
+        elseif ( vector[left+1] > pivot )
+            
+            vector[left+1], vector[right] = vector[right], vector[left+1]
+            right -= 1
+        else
+            left += 1; it += 1
+            vector[left], vector[it] = vector[it], vector[left]
+        end
+    end 
+    
+    
+    return (index_range[begin]) : (it), (right+1) : (index_range[end])
+end
+
 # Вычисление медианы массива
 
 # [НЕПОНЯТНО] -- оказывается, что это по опрделению
@@ -157,21 +203,21 @@ end
             # O(n) + O(n) * O(1) = O(n) 
 
 
-function _invBubbleSort!(vector::Vector)
-# Поскольку нам нужно протолькнуть на свое место только последний
-# элемент, то начинать нужно с конца, а поскольку до него все
-# элементы уже отсортированы, то нужен всего 1 проход
-    index = lastindex(vector)
-    @inbounds while ( index - 1 >= firstindex(vector) )
-        if ( vector[index] < index[index - 1] )
-            vector[index], index[index - 1] =
-            vector[index - 1], index[index] 
-        end
+# function _invBubbleSort!(vector::Vector)
+# # Поскольку нам нужно протолькнуть на свое место только последний
+# # элемент, то начинать нужно с конца, а поскольку до него все
+# # элементы уже отсортированы, то нужен всего 1 проход
+#     index = lastindex(vector)
+#     @inbounds while ( index - 1 >= firstindex(vector) )
+#         if ( vector[index] < index[index - 1] )
+#             vector[index], vector[index - 1] =
+#             vector[index - 1], vector[index] 
+#         end
 
-        index -= 1 
-    end
+#         index -= 1 
+#     end
 
-end
+# end
 
 function _myfunc(vector::AbstractVector{Type}, k::Integer) where Type
     
@@ -192,108 +238,86 @@ function _myfunc(vector::AbstractVector{Type}, k::Integer) where Type
 
     return result
 end
+# ---------------------------------------
 
-
-
-"""Сортировка Хоара"""
-function quick_sort!(A)
-    length(A) <= 1 &&  return A
-    N = length(A)
-    left, right = part_sort!(A, A[rand(1:N)])
-    quick_sort!(left)
-    quick_sort!(right)
-    return A
-end
-
-"""Вспомогательная сортировка"""
-function part_sort!(A, b)
-    N = length(A)
-    K, L, M = 0, 0, N
-    # Инвариант: A[1:K] <b && A[K+1:L] == b && A[M+1:N] > b
-    @inbounds while L < M
-        if A[L+1] == b
-            L += 1
-        elseif A[L+1] > b
-            A[L+1], A[M] = A[M], A[L+1]
-            M -= 1
-        else
-            L += 1; K += 1
-            A[L], A[K] = A[K], A[L]
+function _minimums(vector::AbstractVector{Type}, amount::Integer) where Type
+    
+    size = length(vector)
+    
+    result = sort(vector[1 : amount])
+    index = amount
+    @inbounds while ( index < size )
+        index += 1
+        if ( vector[index] < result[end] )
+            
+            result[end] = vector[index]
+            _invBubbleSort!(result)
         end
     end
-    return @view(A[1:K]), @view(A[M+1:N])
-end
 
-"""Вычисление k-ой порядковой статистики методом Хоара"""
-function order_statistics!(A::AbstractVector{T}, i::Integer)::T where T
-    function find(index_range)
-        left_range, right_range = part_sort!(A, index_range, A[rand(index_range)])
-        if i in left_range
-            return find(left_range) 
-        elseif i in right_range
-            return find(right_range)
-        else
-            return A[i]
-        end
+
+    return result
+end  
+ 
+
+function _invBubbleSort!(vector)::Nothing
+    
+    index = length(vector)
+    @inbounds while ( index > 1 && vector[index - 1] > vector[index] )
+        
+        vector[index - 1], vector[index] =
+         vector[index], vector[index - 1]
+        index -= 1
     end
-    find(firstindex(A):lastindex(A))
 end
 
-@inline function part_sort!(A, index_range::AbstractUnitRange, b)
-    K, L, M = index_range[1]-1, index_range[begin]-1, index_range[end]
-    @inbounds while L < M 
-        if A[L+1] == b
-            L += 1
-        elseif A[L+1] > b
-            A[L+1], A[M] = A[M], A[L+1]
-            M -= 1
-        else
-            L += 1; K += 1
-            A[L], A[K] = A[K], A[L]
-        end
-    end    
-    return index_range[begin]:K, M+1:index_range[end]
+# --------------------------------------- 
+
+
+
+
+# ---------------------------------------
+
+function standard_deviation(vector::AbstractVector)
+    
+    sum = 0
+    sq_sum = 0
+
+    @inbounds for it in firstindex(vector) : lastindex(vector)
+        sum += vector[it]
+        sq_sum += vector[it] * vector[it]
+    end
+
+
+    return sqrt( sq_sum / length(vector) - sum * sum / length(vector) / length(vector) )
 end
 
-"""Вычисление медианы массива"""
-function median(A::AbstractVector{T}) where T
-    if length(A) % 2 != 0
-        return order_statistics!(A, length(A) ÷ 2 + 1)
+# ---------------------------------------
+
+function median(vector::AbstractVector{Type}) where Type
+    
+    size = length(vector)
+    if ( size % 2 != 0 )
+        
+        
+        return order_statistics!(vector, size ÷ 2 + 1)
     else
-        return (order_statistics!(A, Int(length(A)/2)) + order_statistics!(A, Int(length(A)/2) + 1))/2
+
+
+        return ( order_statistics!(vector, Int(size/2)) + order_statistics!(vector, Int(size/2) + 1) ) / 2
     end
 end
 
-"""Поиск первых k наименьших элементов массива"""
-function minimums(array, k)
-    N = length(array)
-    k_minimums = sort(array[1:k])
-    i = k
-    while i < length(array)
-        i += 1
-        if array[i] < k_minimums[end]
-            k_minimums[end] = array[i]
-            insert_end!(k_minimums)
-        end
-    end
-    return k_minimums
-end            
+# ---------------------------------------
 
-function insert_end!(array)::Nothing
-    j = length(array)
-    while j>1 && array[j-1] > array[j]
-        array[j-1], array[j] = array[j], array[j-1]
-        j -= 1
-    end
-end
 
-"""Алгоритм вычисления среднего квадратического отклонения от среднего значения массива"""
-function standard_deviation(A)
-    Sx = 0
-    Sx2 = 0
-    for i in firstindex(A):lastindex(A)
-        Sx += a[i]
-        Sx2 += a[i]*a[i]
-    end
-    return sqrt(Sx2 / length(A) - Sx * Sx / length(A)/ length(A))
-end
+
+
+
+
+
+
+         
+
+
+

@@ -116,12 +116,20 @@ println(issorted(unsorted_vector))
 # b  = (a .== unsorted_vector)
 # println(b)
 
+
+
 function partition!(vector::AbstractVector)
     
     left = firstindex(vector)
     right = lastindex(vector)
-
+    
+    # index_mid = left + (right - left) ÷ 2
+    
+    
+    # vector[end], vector[index_mid] = vector[index_mid], vector[end]
+    # pivot = vector[index_mid]
     pivot = vector[end]
+    
     index_smaller = 0
 
     for it in 1 : lastindex(vector) - 1
@@ -147,9 +155,13 @@ function _quicksort!(vector::AbstractVector)
     if ( length(vector) > 1 )
 
         (leftPart_lastIndex, rightPart_firstIndex) = partition!(vector)
+        
         _quicksort!( @view vector[begin : leftPart_lastIndex] )
+        
         _quicksort!( @view vector[rightPart_firstIndex : end] )
     else 
+        
+        
         return vector
     end
 
