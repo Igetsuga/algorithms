@@ -172,3 +172,63 @@ println(issorted(unsorted_vector))
 
 @time _quicksort!(unsorted_vector)
 println(issorted(unsorted_vector))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function quick_sort!(vector::AbstractVector)
+    
+    length(vector) <= 1 &&  return vector
+    
+    size = length(vector)
+    
+    left, right = part_sort!(vector, vector[rand(1 : size)])
+    
+    quick_sort!(left)
+    quick_sort!(right)
+    
+    return vector
+end
+
+
+
+function part_sort!(vector::AbstractVector{Type}, pivot::Type) where Type
+    
+    size = length(vector)
+    
+    it, left, right = 0, 0, size
+    
+    @inbounds while ( left < right )
+        if vector[left+1] == pivot
+            left += 1
+        elseif vector[left+1] > pivot
+            vector[left+1], vector[right] = vector[right], vector[left+1]
+            right -= 1
+        else
+            left += 1; it += 1
+            vector[left], vector[it] = vector[it], vector[left]
+        end
+    end
+    return @view(vector[1:it]), @view(vector[right+1:size])
+end
+
+unsorted_vector = randn(100000)
+println(issorted(unsorted_vector))
+
+@time quick_sort!(unsorted_vector)
+println(issorted(unsorted_vector))
